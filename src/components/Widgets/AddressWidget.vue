@@ -14,7 +14,7 @@
     <div class="row" v-else-if="status==='ready'" style="margin-bottom:20px;height:90vh;">
       <!-- PDF Display -->
       <div class="col">
-          <div style="display:block;width:100%;height:85vh;margin-bottom:30px;">
+          <div style="display:block;width:100%;height:85vh;margin-bottom:10px;">
             <iframe :src="pdfData" frameborder="0" style="width:100%;height:100%;" ></iframe>
           </div>
           <b-button id="tooltip-button-1" variant="primary" style="margin-top: 10px">More Files</b-button>
@@ -33,11 +33,15 @@
           <!-- Data pointer: {{ widgetPointer }} -->
           <div style="height:95vh;">
           <div class="lead">
+            <span v-if="name!=null">{{name}}</span>
+            <br>
             <span>{{house}}</span>
             <span>{{preDirection}}</span>
             <span>{{streetName}}</span>
             <span>{{street}}</span>
             <span>{{postDirection}}</span>
+            <span>{{court}}</span>
+            <span>{{courtName}}</span>
             <span>{{unit}}</span>
             <span>{{unitName}}</span>
             <br>
@@ -118,6 +122,31 @@
               <div class=" row mx-auto ml-4 mr-4" style="text-align:left; margin:20px;">
                 <p style="margin:0;"> State: {{state}} </p>
               </div>
+              <div v-if="!hideInfo">
+                <div class=" row mx-auto ml-4 mr-4" style="text-align:left; margin:20px;">
+                  <div class = "address" style="margin:0;">
+                    <p style="margin:0;"> Court: </p>
+                    <p class="description"> name of the court ex) Seattle </p>
+                    <input v-model="court" placeholder="Enter court here">
+                  </div>
+                </div>
+                <div class=" row mx-auto ml-4 mr-4" style="text-align:left; margin:20px;">
+                  <div class = "address" style="margin:0;">
+                    <p style="margin:0;"> Court Name: </p>
+                    <p class="description"> name of the court name ex) Seattle </p>
+                    <input v-model="courtName" placeholder="Enter court name here">
+                  </div>
+                </div>
+                <div class=" row mx-auto ml-4 mr-4" style="text-align:left; margin:20px;">
+                  <div class = "address" style="margin:0;">
+                    <p style="margin:0;"> Name: </p>
+                    <p class="description"> name ex) John Doe </p>
+                    <input v-model="name" placeholder="Enter name here">
+                  </div>
+                </div>
+              </div>
+             <b-btn v-if="hideInfo" @click="hideInfo = !hideInfo" class="mx-auto ml-3 mr-3" >More Info.</b-btn>
+             <b-btn v-if="!hideInfo" @click="hideInfo = !hideInfo" class="mx-auto ml-3 mr-3" >Hide Info.</b-btn>
             </div>
           </div>
       </div>
@@ -196,6 +225,7 @@
         year: null,
         zip: null,
         fileOption: [],
+        hideInfo: true,
       };
     },
     watch: {
@@ -203,7 +233,7 @@
         this.getSource();
       },
       widgetPointer() {
-        console.log('widget pointer changed');
+        // console.log('widget pointer changed');
         this.getPdf();
       }
     },
@@ -254,7 +284,7 @@
           .then((response) => {
               const listFixed = item => _.isArray(item) ? item[0] : item;
               const address = response.data
-              console.log('address', address)
+              // console.log('address', address)
               this.house = listFixed(address.house);
               this.preDirection = listFixed(address.preDirection);
               this.streetName = listFixed(address.streetName);
@@ -269,17 +299,23 @@
               this.state = listFixed(address.stateName);
               this.getSource(this.fileName);
           }).catch(error => {
+            if(error.response.status == 401) {
+              alert("You are not authorized");
+              window.location.href="/";
+            } else {
               alert("Failed to load the file");
               window.location.reload();
-              console.log(error)
+            }
           });
         }).catch(error => {
+          if(error.response.status == 401) {
+            alert("You are not authorized");
+            window.location.href="/";
+          } else {
             alert("Failed to load the file");
             window.location.reload();
-            console.log(error)
+          }
       });
-        
-        console.log('testest');
       },
       getSource(file) {
         // API Call to fetch PDF
@@ -309,11 +345,15 @@
           this.status = 'ready';
         })
         .catch(error => {
+          if(error.response.status == 401) {
+            alert("You are not authorized");
+            window.location.href="/";
+          } else {
             alert("Failed to load the file");
             window.location.reload();
-            console.log(error)
+          }
       });
-      },
+      },  
       getFileList(file) {
         // var fDiv = document.getElementById("fileOption");
         // var fList = document.createElement("ul");
@@ -325,7 +365,7 @@
         //   fList.appendChild(fElement);
         // }
         // fDiv.appendChild(fList);
-        console.log(file)
+        // console.log(file)
       },
       getScore(response) {
         // if (response) {
