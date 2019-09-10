@@ -113,7 +113,10 @@ More specifically:
   often missing.
 * **street name** is the name of the street.  It is often numerical
   such as _44th_ or _1st_.  It is normally before the street type but
-  sometimes it may precede it, such as _highway 2_.  It may be
+  sometimes it may precede it, such as _highway 2_.  Please preserve the
+  ordinality of the numeric street names (e.g. _99th_ versus _99_
+  should be different names).
+  Street name may also be
   composed of several words like _Marthin Luther King JR_.  It is
   rarely abbreviated, but sometimes you can see acronyms like _MLK Jr_
   for the former.
@@ -144,8 +147,8 @@ More specifically:
 * **unit name** is the name of the unit, often involving letters and
   numbers, such as _#H-301_.  Note we also include the _#_-sign here,
   if it is written without space.
-* **city** is rather self-evident, not it may be multi-word name, and
-  sometimes include markers that are confusing the automatic
+* **city** is rather self-evident.  It may be a multi-word name, and
+  sometimes it includes markers that are confusing the automatic
   extractors, for instance _Federal Way_ may be taken as a street.
 * **state**: so far we only work with Washington data.
 * **zip** is usually 5-digit, sometimes 5+4 digit.  It is often
@@ -159,6 +162,19 @@ flags the address as unreliable for training data.
 
 
 ## Usage
+
+The usage is mostly self-explanatory.  A few useful notes though:
+
+* In case you are in doubt, do not submit (possibly) wrong results.
+  Just push reload button and you will get a new case, the former case
+  will not be uploaded.  In any case, you are welcome to add comments
+  on the discussion page.
+* The address is normally extracted from the first page of summons,
+  the default page you will see when a new case pops up.  But
+  sometimes the address is not present there, another case it is
+  unreadable or unclear if it is the correct one.  In that case check
+  out other files.  Another file where the address is often present is
+  "Sheriff's return on writ".
 
 
 ## For experts only: local installation
