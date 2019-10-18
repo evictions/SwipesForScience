@@ -48,6 +48,8 @@
             <span>{{city}}</span>,
             <span>{{state}}</span>,
             <span>{{zip}}</span>
+            <span>{{fileName}}</span>
+            
           </div>
 
           <!-- Response Display -->
@@ -100,7 +102,7 @@
               </div>
               <div class=" row mx-auto ml-4 mr-4" style="text-align:left; margin:20px;">
                 <div class = "address" style="margin:0;">
-                  <p style="margin:0;"> Unit Name: </p>
+                  <p style="margin:0;"> Henlo </p>
                   <p class="description"> name of unit ex) A, 1 </p>
                   <input v-model="unitName" placeholder="Enter unit name here">
                 </div>
@@ -115,6 +117,13 @@
               <div class=" row mx-auto ml-4 mr-4" style="text-align:left; margin:20px;">
                 <div class = "address" style="margin:0;">
                   <p style="margin:0;"> Zip: </p>
+                  <p class="description"> zip code ex) 98005 </p>
+                  <input v-model="zip" placeholder="Enter zip here">
+                </div>
+              </div>
+              <div class=" row mx-auto ml-4 mr-4" style="text-align:left; margin:20px;">
+                <div class = "address" style="margin:0;">
+                  <p style="margin:0;"> FileName: </p>
                   <p class="description"> zip code ex) 98005 </p>
                   <input v-model="zip" placeholder="Enter zip here">
                 </div>
