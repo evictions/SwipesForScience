@@ -2,7 +2,7 @@
   <div class="">
     <div class="footer bg-dark pr-3 pl-3">
       <div class="container">
-        <table style="height: 200px; width: 100%;">
+        <table style="height: 100px; width: 100%;">
         <tbody>
           <tr>
 
@@ -74,7 +74,7 @@
 }
 .footer {
   position: relative;
-  height: 200px;
+  height: 100px;
 }
   /*footer*/
   .col_white_amrc { color:#FFF;}
