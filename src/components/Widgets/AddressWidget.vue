@@ -48,6 +48,7 @@
             <span>{{city}}</span>,
             <span>{{state}}</span>,
             <span>{{zip}}</span>
+            <span>{{filename}} </span>
           </div>
 
           <!-- Response Display -->
@@ -121,6 +122,9 @@
               </div>
               <div class=" row mx-auto ml-4 mr-4" style="text-align:left; margin:20px;">
                 <p style="margin:0;"> State: {{state}} </p>
+              </div>
+              <div class=" row mx-auto ml-4 mr-4" style="text-align:left; margin:20px;">
+                <p style="margin:0;"> Filename: {{extractionFileName}} </p>
               </div>
               <div v-if="!hideInfo">
                 <div class=" row mx-auto ml-4 mr-4" style="text-align:left; margin:20px;">
@@ -226,6 +230,7 @@
         zip: null,
         fileOption: [],
         hideInfo: true,
+        extractionFileName: null,
       };
     },
     watch: {
@@ -297,6 +302,7 @@
               this.city = listFixed(address.city);
               this.zip = listFixed(address.zip);
               this.state = listFixed(address.stateName);
+              this.extractionFileName = listFixed(address.fileName)
               this.getSource(this.fileName);
           }).catch(error => {
             if(error.response.status == 401) {
