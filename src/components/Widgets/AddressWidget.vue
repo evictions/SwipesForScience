@@ -48,6 +48,7 @@
             <span>{{city}}</span>,
             <span>{{state}}</span>,
             <span>{{zip}}</span>
+            
           </div>
 
           <!-- Response Display -->
@@ -144,6 +145,12 @@
                     <input v-model="name" placeholder="Enter name here">
                   </div>
                 </div>
+                <div class=" row mx-auto ml-4 mr-4" style="text-align:left; margin:20px;">
+                  <p style="margin:0;"> Filename: {{extractionFileName}} </p>
+                </div>
+                <div class=" row mx-auto ml-4 mr-4" style="text-align:left; margin:20px;">
+                <p style="margin:0;"> Confidence: {{confidence}} </p>
+              </div>
               </div>
              <b-btn v-if="hideInfo" @click="hideInfo = !hideInfo" class="mx-auto ml-3 mr-3" >More Info.</b-btn>
              <b-btn v-if="!hideInfo" @click="hideInfo = !hideInfo" class="mx-auto ml-3 mr-3" >Hide Info.</b-btn>
@@ -218,6 +225,7 @@
         postDirection: null,
         preDirection: null,
         state: null,
+        confidence: null,
         street: null,
         streetName: null,
         unit: null,
@@ -226,6 +234,7 @@
         zip: null,
         fileOption: [],
         hideInfo: true,
+        extractionFileName: null,
       };
     },
     watch: {
@@ -297,6 +306,8 @@
               this.city = listFixed(address.city);
               this.zip = listFixed(address.zip);
               this.state = listFixed(address.stateName);
+              this.confidence = listFixed(address.confidence);
+              this.extractionFileName = listFixed(address.fileName)
               this.getSource(this.fileName);
           }).catch(error => {
             if(error.response.status == 401) {
@@ -422,7 +433,8 @@
                      unitName: this.unitName,
                      unit: this.unit,
                      zip: this.zip,
-                     state: this.state
+                     state: this.state,
+                     confidence: this.confidence
                      });
         this.casenumber = null;
         this.name = null;
@@ -440,6 +452,7 @@
         this.unit = null;
         this.zip = null;
         this.state = null;
+        this.confidence = null;
       },
       /**
        * This method should tell users how their widgetProperties configuration should be defined.
