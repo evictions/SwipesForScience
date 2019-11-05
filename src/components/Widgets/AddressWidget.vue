@@ -90,9 +90,6 @@
                   <input v-model="postDirection" placeholder="Enter street post direction here">
                 </div>
               </div>
-              <div class=" row mx-auto ml-4 mr-4" style="text-align:left; margin:20px;">
-                <p style="margin:0;"> Filename: {{extractionFileName}} </p>
-              </div>
             </div>
             <div class="col">
               <div class=" row mx-auto ml-4 mr-4" style="text-align:left; margin:20px;">
@@ -147,6 +144,9 @@
                     <p class="description"> name ex) John Doe </p>
                     <input v-model="name" placeholder="Enter name here">
                   </div>
+                </div>
+                <div class=" row mx-auto ml-4 mr-4" style="text-align:left; margin:20px;">
+                  <p style="margin:0;"> Filename: {{extractionFileName}} </p>
                 </div>
                 <div class=" row mx-auto ml-4 mr-4" style="text-align:left; margin:20px;">
                 <p style="margin:0;"> Confidence: {{confidence}} </p>
